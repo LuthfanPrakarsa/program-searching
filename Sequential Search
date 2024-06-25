@@ -1,0 +1,54 @@
+def sequential_search(stok_barang, target_barang):
+    for i in range(len(stok_barang)):
+        if stok_barang[i]['nama'] == target_barang:
+            return i
+    return -1
+
+def tambah_barang(stok_barang):
+    jumlah = int(input("Masukkan jumlah barang yang ingin ditambahkan: "))
+    for i in range(jumlah):
+        nama = input(f"Masukkan nama barang ke-{i+1}: ")
+        jumlah_stok = int(input(f"Masukkan jumlah stok barang ke-{i+1}: "))
+        stok_barang.append({'nama': nama, 'jumlah': jumlah_stok})
+
+def tampilkan_barang(stok_barang):
+    if len(stok_barang) == 0:
+        print("Tidak ada barang dalam stok.")
+    else:
+        print("Daftar Barang:")
+        for i, barang in enumerate(stok_barang, 1):
+            print(f"{i}. {barang['nama']} - {barang['jumlah']} unit")
+    print()  # baris kosong buat pemisah output
+
+def cari_barang(stok_barang):
+    tampilkan_barang(stok_barang)
+    target_barang = input("Masukkan nama barang yang akan dicari: ")
+    result = sequential_search(stok_barang, target_barang)
+    
+    if result != -1:
+        print(f"Barang '{target_barang}' ditemukan pada index {result} dengan jumlah stok {stok_barang[result]['jumlah']} unit\n")
+    else:
+        print(f"Barang '{target_barang}' tidak ditemukan dalam stok\n")
+
+def main():
+    stok_barang = []
+
+    while True:
+        print("1. Tambah barang")
+        print("2. Tampilkan daftar barang")
+        print("3. Cari barang")
+        print("4. Keluar dari program")
+        choice = input("Masukkan Pilihan: ")
+        
+        if choice == '1':
+            tambah_barang(stok_barang)
+        elif choice == '2':
+            tampilkan_barang(stok_barang)
+        elif choice == '3':
+            cari_barang(stok_barang)
+        elif choice == '4':
+            break
+        else:
+            print("Pilihan tidak valid, silakan input ulang")
+
+main()
