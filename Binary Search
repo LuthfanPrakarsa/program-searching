@@ -1,0 +1,40 @@
+def binary_search(buku, target_year):
+    low = 0
+    high = len(buku) - 1
+    
+    while low <= high:
+        mid = (low + high) // 2
+        mid_year = buku[mid]['year']
+        
+        if mid_year == target_year:
+            return buku[mid]
+        elif mid_year < target_year:
+            low = mid + 1
+        else:
+            high = mid - 1
+    
+    return None
+
+buku = [
+    {"title": "Langit", "year": 1990},
+    {"title": "Bulan", "year": 1995},
+    {"title": "Bumi", "year": 2000},
+    {"title": "Aku", "year": 2005},
+    {"title": "Kata", "year": 2010}
+]
+
+print("Daftar Buku:")
+for book in buku:
+    print(f"{book['title']} - Tahun Terbit: {book['year']}")
+
+try:
+    target_year = int(input("\nMasukkan tahun terbit yang ingin dicari: "))
+except ValueError:
+    print("Input tidak valid. Harap masukkan angka.")
+
+result = binary_search(buku, target_year)
+
+if result:
+    print(f"\nBuku ditemukan: {result['title']} ({result['year']})")
+else:
+    print(f"\nTidak ada buku yang ditemukan untuk tahun {target_year}")
